@@ -9,7 +9,7 @@ $ docker pull jasonrivers/nagios:latest
 
 Create directories for persistent data:
 ```
-$ mkdir -p /home/drew/nagios/etc/ /home/drew/nagios/var /home/drew/nagios/Custom-Nagios-Plugins
+$ mkdir -p /home/drew/nagios/etc /home/drew/nagios/var /home/drew/nagios/Custom-Nagios-Plugins
 ```
 
 Run The container:
@@ -38,6 +38,11 @@ $ docker exec -it nagios4 /bin/bash
 root@2c9389484f5b:/ # docker start nagios4 /usr/local/bin/start_nagios
 root@2c9389484f5b:/ # nagios -v /opt/nagios/etc/nagios.cfg
 root@2c9389484f5b:/ # kill -HUP <nagios pid>
+```
+
+Copy this repo and add it to nagios.cfg as an include_dir:
+```
+/home/drew/nagios/etc/nagios-invadelabs
 ```
 
 ## Fedora / CentOS/ RHEL Client Configuration
