@@ -8,4 +8,11 @@ command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
 command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200
 command[check_sda1]=/usr/lib/nagios/plugins/check_disk -c 10% -p /dev/mmcblk0p2
 command[check_apt]=/usr/lib/nagios/plugins/check_apt
-command[check_fail2ban]=/usr/lib/nagios/plugins/check_fail2ban.sh -l /var/log/fail2ban.log -p /etc/fail2ban/fail2ban.conf -w 1 -c 2
+command[check_fail2ban]=/usr/lib/nagios/plugins/check_fail2ban.sh -w 1 -c 2
+# http://nagios.fm4dd.com/plugins/manual/check_fail2ban.htm
+# wget http://nagios.fm4dd.com/plugins/source/check_fail2ban.sh
+# chmod 755 check_fail2ban.sh
+# sudo chown root:root check_fail2ban.sh
+# sudo mv check_fail2ban.sh /usr/lib/nagios/plugins/check_fail2ban.sh
+# sudo chown root:nagios /var/run/fail2ban/fail2ban.sock
+# sudo chmod 770 /var/run/fail2ban/fail2ban.sock
