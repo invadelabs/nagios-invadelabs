@@ -9,15 +9,16 @@ $ docker pull jasonrivers/nagios:latest
 
 Create directories for persistent data:
 ```
-$ mkdir -p /home/drew/nagios/etc /home/drew/nagios/var /home/drew/nagios/Custom-Nagios-Plugins
+$ mkdir -p /home/drew/nagios/etc /home/drew/nagios/var /home/drew/nagios/Custom-Nagios-Plugins /home/drew/nagios/nagiosgraph/var
 ```
 
 Run The container:
 ```
 $ docker run --name nagios4  \
-  -v /home/drew/nagios/etc/:/opt/nagios/etc/ \
+  -v /home/drew/nagios/etc:/opt/nagios/etc/ \
   -v /home/drew/nagios/var:/opt/nagios/var/ \
   -v /home/drew/nagios/Custom-Nagios-Plugins:/opt/Custom-Nagios-Plugins \
+  -v /home/drew/nagios/nagiosgraph/var:/opt/nagiosgraph/var \
   -p 0.0.0.0:8080:80 jasonrivers/nagios:latest
 ```
 
