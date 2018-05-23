@@ -9,16 +9,17 @@ $ docker pull jasonrivers/nagios:latest
 
 Create directories for persistent data:
 ```
-$ mkdir -p /home/drew/nagios/etc /home/drew/nagios/var /home/drew/nagios/Custom-Nagios-Plugins /home/drew/nagios/nagiosgraph/var
+$ mkdir -p /srv/nagios4/{etc,var,Custom-Nagios-Plugins,nagiosgraph/var}
 ```
 
-Run The container:
+Run The container (handled via invadelabs/ansible-invadelabs:drew-serv.yml):
 ```
 $ docker run --name nagios4  \
-  -v /home/drew/nagios/etc:/opt/nagios/etc/ \
-  -v /home/drew/nagios/var:/opt/nagios/var/ \
-  -v /home/drew/nagios/Custom-Nagios-Plugins:/opt/Custom-Nagios-Plugins \
-  -v /home/drew/nagios/nagiosgraph/var:/opt/nagiosgraph/var \
+  -v /srv/nagios4/etc:/opt/nagios/etc/ \
+  -v /srv/nagios4/var:/opt/nagios/var/ \
+  -v /srv/nagios4/Custom-Nagios-Plugins:/opt/Custom-Nagios-Plugins \
+  -v /srv/nagios4/nagiosgraph/var:/opt/nagiosgraph/var \
+  -v /srv/nagios4/main.cf:/etc/postfix/main.cf
   -p 0.0.0.0:8080:80 jasonrivers/nagios:latest
 ```
 
