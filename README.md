@@ -20,6 +20,7 @@ $ docker run --name nagios4  \
   -v /srv/nagios4/Custom-Nagios-Plugins:/opt/Custom-Nagios-Plugins \
   -v /srv/nagios4/nagiosgraph/var:/opt/nagiosgraph/var \
   -v /srv/nagios4/main.cf:/etc/postfix/main.cf
+  -v /srv/nagios4/nagios.conf:/etc/apache2/sites-available/nagios.conf
   -p 0.0.0.0:8080:80 jasonrivers/nagios:latest
 ```
 
