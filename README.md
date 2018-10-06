@@ -1,6 +1,8 @@
 nagios-invadelabs
 -----------------
-Setup for Invade Labs Nagios Docker using https://hub.docker.com/r/jasonrivers/nagios/
+Setup for Invade Labs Nagios Docker using [jasonrivers/nagios](https://hub.docker.com/r/jasonrivers/nagios/)
+
+*2018.05.28* - now using ansible to manage docker container life cycle in [invadelabs/ansible-invadelabs](https://github.com/invadelabs/ansible-invadelabs/blob/5c62a81a3bc845ff1d5bd4e1da790555b5dc21d9/local.yml#L236-L261).
 
 Pull down container:
 ```
@@ -45,7 +47,46 @@ root@2c9389484f5b:/ # kill -HUP <nagios pid>
 
 Copy this repo and add it to nagios.cfg as an include_dir:
 ```
-/home/drew/nagios/etc/nagios-invadelabs
+grep nagios-invadelabs nagios.cfg
+cfg_dir=/opt/nagios/etc/nagios-invadelabs
+```
+
+Other changes to nagios.cfg:
+```
+$ cat nagios.cfg.diff-2018-05-27
+830,831c830,831
+< host_perfdata_file=/opt/nagios/var/perfdata-host.log
+< service_perfdata_file=/opt/nagios/var/perfdata-service.log
+---
+> #host_perfdata_file=/opt/nagios/var/host-perfdata
+> service_perfdata_file=/opt/nagios/var/perfdata.log
+843c843
+< host_perfdata_file_template=$LASTHOSTCHECK$||$HOSTNAME$||$HOSTOUTPUT$||$HOSTPERFDATA$
+---
+> host_perfdata_file_template=empty
+853c853
+< host_perfdata_file_mode=a
+---
+> host_perfdata_file_mode=w
+864c864
+< host_perfdata_file_processing_interval=10
+---
+> #host_perfdata_file_processing_interval=0
+874c874
+< host_perfdata_file_processing_command=process-host-perfdata-file
+---
+> #host_perfdata_file_processing_command=process-host-perfdata-file
+1175,1176c1175,1176
+< admin_email=drew@invadelabs.com
+< admin_pager=drew@invadelabs.com
+---
+> admin_email=nagios@localhost
+> admin_pager=pagenagios@localhost
+```
+
+cgi.cfg (show all results by default):
+```
+result_limit=0
 ```
 
 ## Fedora / CentOS/ RHEL Client Configuration
